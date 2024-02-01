@@ -1,0 +1,25 @@
+@startuml
+class BookingSchema {
+  +bookingId: ObjectId
+  +fromDate: Date
+  +toDate: Date
+  +status: String
+  +UserSchema: userEmail
+  +CarSchema: carName, total, image
+}
+
+class UserSchema {
+  +userId: ObjectId
+  +userEmail: String
+}
+
+class CarSchema {
+  +carId: ObjectId
+  +carName: String
+  +total: Number
+  +image: String
+}
+
+BookingSchema "1" --> "1" UserSchema: depends on
+BookingSchema "1" --> "1" CarSchema: depends on
+@enduml

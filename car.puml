@@ -1,0 +1,9 @@
+@startuml
+class CarSchema {
+    +carId: ObjectId
+    +carName: String
+    +carModel: String
+    +carYear: Number
+    +carPrice: Number
+}
+@enduml

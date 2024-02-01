@@ -1,0 +1,9 @@
+@startuml
+class UserSchema {
+  +userId: ObjectId
+  +userName: String
+  +userEmail: String
+  +userPassword: String
+  +userPhone: String
+}
+@enduml
