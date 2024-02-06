@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var BookingSchema = require('../models/bookingSchema');
 
+
 router.post('/reserve', async (req, res) => {
     try {
         const { carName, total, image, fromDate, toDate, status, userEmail } = req.body;
@@ -12,7 +13,7 @@ router.post('/reserve', async (req, res) => {
         // Save the booking to the database
         await booking.save();
 
-        res.status(201).json(booking);
+        res.status(201).json({status: "success", booking: booking});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -20,8 +21,11 @@ router.post('/reserve', async (req, res) => {
 
 router.get('/my-bookings', async (req, res) => {
     try {
-        // const bookings = await BookingSchema.find({});
-        res.status(200).json({message: 'success'});
+        const bookings = await BookingSchema.find({});
+        bookings.sort((a, b)=>{
+            return b._id.getTimestamp() - a._id.getTimestamp()
+        })
+        res.status(200).json({message: 'success', bookings: bookings});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
